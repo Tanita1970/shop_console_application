@@ -1,6 +1,8 @@
 enum Category {
+  general,
   bakeryProducts,
   vegetablesAndFruits,
+  pastaCerealsFlour,
   sweets,
   alcohol,
   milkAndFermentedMilk,
@@ -11,6 +13,7 @@ enum Category {
 
 // Единицы измерения
 enum Measure {
+  general,
   grams,
   kilograms,
   liter,
@@ -19,23 +22,29 @@ enum Measure {
 }
 
 class Product {
+  final String id;
   final String title;
   final Category category;
   final Measure measure;
+  final int weight;
   final double price;
-  final int id;
-  int discount;
+  final String brand;
+  final String country;
   final String description;
+  final int discount;
 
-  Product(
-    this.title,
-    this.measure, {
-    required this.category,
-    required this.price,
+  Product({
     required this.id,
+    required this.title,
+    required this.price,
+    this.category = Category.general,
+    this.measure = Measure.grams,
+    this.weight = 1000,    
+    this.brand = "Без бренда",
+    this.country = "Без страны",
+    this.description = "Без описания",
     this.discount = 0,
-    String? description,
-  }) : description = description ?? getDefaultDescription(title);
+  });
 
   static String getDefaultDescription(String title) {
     return "Описание продукта $title";
